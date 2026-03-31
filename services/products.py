@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List, Dict, Any
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-FILE_PATH = BASE_DIR / "data" / "products.json"
+FILE_PATH = BASE_DIR / "data1" / "products.json"
 
 logger = logging.getLogger(__name__)
 
