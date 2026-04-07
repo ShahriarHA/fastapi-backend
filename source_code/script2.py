@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, Query, Path
 from services.products import get_all_data
+from schema.product_schema import Product
+
 
 app = FastAPI()
 
@@ -38,7 +40,7 @@ offset: int = Query(
 
 @app.get("/products/{product_id}")
 def product_id(
-    product_id:str = Path(...,min_length=36,max_length=36,example="394d40e7-2ad5-335d-8738-c6af6be5a97f",description="UUID of the products"),
+    product_id:str = Path(...,min_length=36,max_length=36,examples="394d40e7-2ad5-335d-8738-c6af6be5a97f",description="UUID of the products"),
 
 ):
     products = get_all_data()
@@ -49,6 +51,10 @@ def product_id(
     raise HTTPException(status_code=404, detail="page not found!")
     
 
+
+@app.post("/products",status_code=201)
+def create_product(product: Product):
+    return product
 
 
 
