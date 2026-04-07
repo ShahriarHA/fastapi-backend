@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Path
 from services.products import get_all_data
 
 app = FastAPI()
@@ -37,7 +37,10 @@ offset: int = Query(
     return {"total_products":len_products,"limit":limit, "items":products}
 
 @app.get("/products/{product_id}")
-def product_id(product_id:str):
+def product_id(
+    product_id:str = Path(...,min_length=36,max_length=36,example="394d40e7-2ad5-335d-8738-c6af6be5a97f",description="UUID of the products"),
+
+):
     products = get_all_data()
 
     for product in products:
